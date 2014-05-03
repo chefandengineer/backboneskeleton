@@ -83,7 +83,7 @@ var onHtmlRequestHandler = function(request, response) {
    when this is live, nodjitsu only listens on 1 port(80) so the httpServer will hear it first but
    we need to pass the request to the mongodbServer
    */
-  if ( process.env.PORT && url === '/messages') {
+  if ( process.env.PORT && request.url === '/messages') {
     
     // pass the request to mongodbServer
    
