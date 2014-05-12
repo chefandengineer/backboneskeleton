@@ -1,24 +1,59 @@
 .map-div
 {
-	margin-top: 10px;
+	margin-top: 60px;
 	height: 600px;
-	/*width : 300px;*/
-	/*position:fixed!important;*/
+	width:100%;
+	border-color: black;
+	border-width: 2px;
+	border-style: solid
+}
+.address {
+	font-size: 9px;
+	margin-top: 10px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.foodItems{
+	white-space: nowrap;
+	text-overflow:ellipsis; 
+	overflow-y: scroll; 
+	height : 20px;
+	overflow:hidden;
 }
 
-.searchresult-list-container
+#searchresult-list-container
 {
-	/*height :  600px;*/
-	/*overflow: scroll;*/
+	height :  600px;
+	margin-top: 60px;
+	overflow-y: scroll;
+	border-width: 1px;
 }
-/*
-h1, .h1, h2, .h2, h3, .h3 {
-margin-top: 0px !important;
-margin-bottom: 0px !important;
+.foodtruckMarker {
+	max-width: 400px;
+}
+#background {
+    width: 100%; 
+    height: 100%; 
+    position: fixed; 
+    left: 0px; 
+    top: 0px; 
+    z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
+}
+body
+{
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+.stretch {
+    width:100%;
+    height:100%;
 }
 .row{
 	margin-left: 10px !important;
 	margin-right: 10px !important;
+}
+.foodtruck {
+	color : white;
 }
 .foodItems{
 	white-space: nowrap;
@@ -27,10 +62,7 @@ margin-bottom: 0px !important;
 	width : 30em;
 	overflow:hidden;
 }
-.truckName:hover {
-	text-decoration:none;
+.truckName, .truckName:hover {
+	text-decoration:none !important;
+	color: white;
 }
-body {
-  padding-top: 50px;
-  padding-bottom: 20px;
-}*/

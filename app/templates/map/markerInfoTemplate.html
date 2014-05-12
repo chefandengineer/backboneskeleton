@@ -1,14 +1,17 @@
-<div class="row foodtruck">
+<div class="foodtruckMarker">
+<div class="row">
 	<div class="col-md-8">
 		<h3><%= foodtruck.get("truckName")%></h3><br>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 address">
 		<address>
 			<%= foodtruck.get("address")%><br>
 			San Francisco, CA
 		</address>
 	</div>
 </div>
-<div class="row">
+<div>
 	<%= "<strong>Food Items : </strong>" + foodtruck.get("foodItems")%>
 </div>
+</div>
+
