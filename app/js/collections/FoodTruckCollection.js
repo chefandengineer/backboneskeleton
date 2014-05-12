@@ -6,7 +6,7 @@ define([
 ], function($, _, Backbone, FoodTruckModel){
   var FoodTruckCollection = Backbone.Collection.extend({
     model: FoodTruckModel,
-    url: 'http://localhost:8888/foodtrucks'
+    url: 'http://peaceful-island-7525.herokuapp.com/foodtrucks'
   });
   return FoodTruckCollection;
 });
