@@ -1,0 +1,19 @@
+<% var i = 1 %>
+<% _.each(foodtrucks, function(data) { %>
+<div class="row foodtruck">
+	<div class="col-md-8">
+		<h3><a class="truckName" href="#"><%= i + ". " + data.get("truckName")%></a></h3><br>
+	</div>
+	<div class="col-md-4">
+		<address>
+			<%= data.get("address")%><br>
+			San Francisco, CA   
+		</address>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+		<%= "<strong>Food Items : </strong>" + data.get("foodItems")%>
+		</div>
+	</div>
+</div>
+<% i++;}); %>

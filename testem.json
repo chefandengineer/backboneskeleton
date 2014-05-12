@@ -1,0 +1,19 @@
+{
+ "framework" : "mocha+chai",
+ "src_files" : [
+	"app/js/libs/require/require.js",
+	"app/js/libs/require/text.js",
+	"app/js/libs/require/async.js",
+	"app/js/libs/require/text.js",
+ 	"app/js/libs/jquery/jquery-min.js",
+ 	"app/js/libs/backbone/backbone-min.js",
+ 	"app/js/libs/underscore/underscore-min.js",
+	"app/js/collections/*.js",
+	"app/js/router/*.js",
+	"app/js/views/map/*.js",
+	"app/js/models/*.js",
+	"app/js/views/search/*.js",
+	"app/main.js",
+	"test/sf-foodtrucks-test.js"
+ ]
+}
