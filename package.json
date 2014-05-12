@@ -11,6 +11,8 @@
   "dependencies": {
     "restify": "1.4.x",
     "mongoose": "2.6.x",
-    "connect": "2.7.4"
+    "connect": "2.7.4",
+    "chai": "~1.4.2",
+    "mocha": "*"
   }
 }

@@ -1,11 +1,36 @@
-/* Not really too concerned with how to organize CSS 
-   the opinions are too diverse                      */
+.map-div
+{
+	margin-top: 10px;
+	height: 600px;
+	/*width : 300px;*/
+	/*position:fixed!important;*/
+}
 
-/* Third party helper libraries */
-@import url("normalize.css");
-
-/* Custom themes */
-@import url("theme.css");
-@import url("menus.css");
-@import url("layout.css");
-
+.searchresult-list-container
+{
+	/*height :  600px;*/
+	/*overflow: scroll;*/
+}
+/*
+h1, .h1, h2, .h2, h3, .h3 {
+margin-top: 0px !important;
+margin-bottom: 0px !important;
+}
+.row{
+	margin-left: 10px !important;
+	margin-right: 10px !important;
+}
+.foodItems{
+	white-space: nowrap;
+	text-overflow:ellipsis; 
+	height : 20px;
+	width : 30em;
+	overflow:hidden;
+}
+.truckName:hover {
+	text-decoration:none;
+}
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}*/

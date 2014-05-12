@@ -1,23 +1,22 @@
 // Require.js allows us to configure shortcut alias
 // Their usage will become more apparent futher along in the tutorial.
 require.config({
+  baseUrl : "js/",
   paths: {
     // Major libraries
     jquery: 'libs/jquery/jquery-min',
     underscore: 'libs/underscore/underscore-min', // https://github.com/amdjs
     backbone: 'libs/backbone/backbone-min', // https://github.com/amdjs
-
-    // Require.js plugins
+    async : 'libs/require/async',
+    bootstrap : 'libs/bootstrap/bootstrap.min',
     text: 'libs/require/text',
+    templates: '../templates',
+    //collections
+    foodtruckcollection : 'collections/FoodTruckCollection',
 
-    // Just a short cut so we can put our html outside the js dir
-    // When you have HTML/CSS designers this aids in keeping them out of the js directory
-    templates: '../templates'
   }
 
 });
-
-// Let's kick off the application
 
 require([
   'router/MainRouter'

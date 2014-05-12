@@ -1,7 +1,0 @@
-<% _.each(messages, function(message) { %>
-<!-- This isn't great sanitization and you will want something more secure for outputting untrusted data to the page -->
-<h1>this is the sec list</h1>
-<pre class="message"><%= message.get('message').replace(/</g, '&lt;') %></pre>
-<em class="date"><%= message.get('date') + "sec list" %></em>
-
-<% }); %>
