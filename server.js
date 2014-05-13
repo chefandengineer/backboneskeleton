@@ -10,25 +10,16 @@ var restify = require('restify');
 
 var config = require('./config');
 
-// localhost
 
 var httpPort = process.env.PORT || 8080;
-var mongodbPort = 8888;
+var mongodbPort = 8080;
 
-/* 
- 
- see README.md for a more detailed write up 
-
-*/
-
-//////////////////////////////////////////////////////// HTTP - sends html/js/css to the browswer 
 
 var sendHTML = function( filePath, contentType, response ){
 
   console.log('sendHTML: ' + filePath) ;
 
   path.exists(filePath, function( exists ) {
-     
         if (exists) {
             fs.readFile(filePath, function(error, content) {
                 if (error) {
@@ -51,9 +42,12 @@ var sendHTML = function( filePath, contentType, response ){
 var getFilePath = function(url) {
 
   var filePath = './app' + url;
-  if (url == '/' ) filePath = './app/index.html';
+  if (url == '/' ) { 
+      filePath = './app/index.html';
+  } else {
+     filePath =  filePath.replace("/docs","");
+  }
 
-  console.log("url: " + url)
 
   return filePath;
 }
@@ -79,28 +73,14 @@ var onHtmlRequestHandler = function(request, response) {
 
   console.log('onHtmlRequestHandler... request.url: ' + request.url) ;
 
-  /*
-   when this is live, nodjitsu only listens on 1 port(80) so the httpServer will hear it first but
-   we need to pass the request to the mongodbServer
-   */
-  if ( process.env.PORT && request.url === '/messages') {
-    
-    // pass the request to mongodbServer
-   
-
-    return; 
-  } 
-
   var filePath = getFilePath(request.url);
   var contentType = getContentType(filePath);
 
   console.log('onHtmlRequestHandler... getting: ' + filePath) ;
-
   sendHTML(filePath, contentType, response); 
-
 }
 
-httpServer.createServer(onHtmlRequestHandler).listen(httpPort); 
+//httpServer.createServer(onHtmlRequestHandler).listen(httpPort); 
 
 ////////////////////////////////////////////////////// MONGODB - saves data in the database and posts data to the browser
 
@@ -162,25 +142,6 @@ mongoose.model('FoodTruck',FoodTruckSchema);
 var FoodTruckMongooseModel = mongoose.model('FoodTruck');
 
 
-/*
-
-this approach was recommended to remove the CORS restrictions instead of adding them to each request
-but its not working right now?! Something is wrong with adding it to mongodbServer
-
-// Enable CORS
-mongodbServer.all( '/*', function( req, res, next ) {
-  res.header( 'Access-Control-Allow-Origin', '*' );
-  res.header( 'Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS' );
-  res.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control' );
-  if( 'OPTIONS' == req.method ) {
-  res.send( 203, 'OK' );
-  }
-  next();
-});
-
-
-*/
-
 
 // This function is responsible for returning all entries for the Message model
 var getMessages = function(req, res, next) {
@@ -223,7 +184,7 @@ var postMessage = function(req, res, next) {
 }
 
 var getUsers = function(req,res,next){
-    res.header( 'Access-Control-Allow-Origin', '*' );
+  res.header( 'Access-Control-Allow-Origin', '*' );
   res.header( 'Access-Control-Allow-Method', 'POST, GET, PUT, DELETE, OPTIONS' );
   res.header( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-File-Name, Content-Type, Cache-Control' );
   
@@ -251,24 +212,11 @@ var postUser = function(req, res, next) {
 var user = new UserMongooseModel(); 
   
   console.log("mongodbServer postMessage: " + req.params.user);
-
   user.user = req.params.user;
   user.save(function () {
     res.send(req.body);
   });
 }
-
-
-
-
-var FoodTruckSchema = new Schema({
-  locationId : Number,
-  locationDesc : String,
-  address : String,
-  foodItems : String,
-  latitude : Number,
-  longtitude : Number 
-})
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km
@@ -396,8 +344,12 @@ mongodbServer.post('/messages', postMessage);
 mongodbServer.get('/users', getUsers);
 mongodbServer.post('/users', postUser);
 
+
 mongodbServer.get('/foodtrucks/:lat/:lng',getFoodTrucksByLocation);
 mongodbServer.get('/foodtrucks',getFoodTrucks);
+mongodbServer.get('/',onHtmlRequestHandler);
+mongodbServer.get('/docs/.*',onHtmlRequestHandler);
+
 
 
 
