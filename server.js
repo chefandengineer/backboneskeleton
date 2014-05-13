@@ -326,7 +326,7 @@ var getFoodTrucksByLocation = function(req,res,next){
 
 mongodbServer.listen(mongodbPort, function() {
   
-  var consoleMessage = '\n A Simple MongoDb, Mongoose, Restify, and Backbone Tutorial'
+  var consoleMessage = '\n San Francisco Food Truck Application! Server Started';
   consoleMessage += '\n +++++++++++++++++++++++++++++++++++++++++++++++++++++' 
   consoleMessage += '\n\n %s says your mongodbServer is listening at %s';
   consoleMessage += '\n great! now open your browser to http://localhost:8080';
