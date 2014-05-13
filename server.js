@@ -11,8 +11,8 @@ var restify = require('restify');
 var config = require('./config');
 
 
-var httpPort = process.env.PORT || 8080;
-var mongodbPort = 8080;
+//var httpPort = process.env.PORT || 8080;
+var mongodbPort = process.env.PORT || 8080;
 
 
 var sendHTML = function( filePath, contentType, response ){
