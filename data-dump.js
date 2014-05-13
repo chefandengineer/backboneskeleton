@@ -3,10 +3,10 @@ var fs = require('fs')
 var mongoose = require('mongoose/');
 var restify = require('restify');  
 var mongoURI = 'mongodb://heroku_app24825494:j03hj9n6hdtgvmpvdq6qi641a2@ds037478.mongolab.com:37478/heroku_app24825494';
-var mongoURILocal = 'mongodb://localhost/nationalpark';
+//var mongoURILocal = 'mongodb://localhost/nationalpark';
 
 console.log("connecting");
-var db = mongoose.connect(mongoURILocal);
+var db = mongoose.connect(mongoURI);
 var Schema = mongoose.Schema;  
 console.log("connected");
 
@@ -21,6 +21,9 @@ var FoodTruckSchema = new Schema({
 })
 mongoose.model('FoodTruck',FoodTruckSchema);
 var FoodTruckMongooseModel = mongoose.model('FoodTruck');
+// FoodTruckMongooseModel.remove({}, function(err) { 
+//    console.log('collection removed') 
+// });
 var insertData = function(err,data){
 	var record;
 	var i;
@@ -31,6 +34,7 @@ var insertData = function(err,data){
   	var foodItems;
   	var latitude;
   	var longtitude; 
+  	var totalRecords = 0;
 
 	if (err) throw err;
 	data = JSON.parse(data);
@@ -48,9 +52,10 @@ var insertData = function(err,data){
 		FoodTruck.longtitude = record[23];
 
 		FoodTruck.save(function(){
-			console.log("1 record has been saved...");
+			totalRecords++;
+			console.log(totalRecords);
 		})
-	};	
+	};
 }
 
 fs.readFile(dataDir, 'utf-8',insertData)

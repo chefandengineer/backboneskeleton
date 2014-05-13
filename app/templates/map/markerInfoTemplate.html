@@ -3,14 +3,14 @@
 	<div class="col-md-8">
 		<h3><%= foodtruck.get("truckName")%></h3><br>
 	</div>
-	<div class="col-md-4 address">
+	<div class="col-md-4 addressMarker">
 		<address>
 			<%= foodtruck.get("address")%><br>
 			San Francisco, CA
 		</address>
 	</div>
 </div>
-<div>
+<div style="margin-left : 20px">
 	<%= "<strong>Food Items : </strong>" + foodtruck.get("foodItems")%>
 </div>
 </div>

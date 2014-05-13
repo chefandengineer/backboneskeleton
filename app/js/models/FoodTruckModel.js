@@ -5,6 +5,7 @@ define([
   var FoodTruckModel = Backbone.Model.extend({
       url: 'http://peaceful-island-7525.herokuapp.com/foodtrucks',
       //url: 'http://nationalpark-mongodb.jit.su/messages'
+    //  url : 'http://localhost:8080/foodtrucks',
       defaults : {
       "truckName" : "",
   		"locationId" : 0,

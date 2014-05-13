@@ -122,13 +122,13 @@ var UserSchema = new Schema({
 
 //FoodTruck Schema
 var FoodTruckSchema = new Schema({
+  longtitude : Number, 
   truckName : String,
   locationId : Number,
   locationDesc : String,
   address : String,
   foodItems : String,
-  latitude : Number,
-  longtitude : Number 
+  latitude : Number
 })
 
 // Use the schema to register a model
@@ -218,6 +218,16 @@ var user = new UserMongooseModel();
   });
 }
 
+
+var FoodTruckSchema = new Schema({
+   locationId : Number,
+   locationDesc : String,
+   address : String,
+   foodItems : String,
+   latitude : Number,
+   longtitude : Number 
+ })
+
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
@@ -257,8 +267,8 @@ var getFoodTrucks = function(req, res, next) {
     lng = req.query.lng;
 
     console.log("Looking for food trucks near lat : " + lat + " , lng : " + lng);
-
-    FoodTruckMongooseModel.find().execFind(function (arr,data) {
+    FoodTruckMongooseModel.find().limit(600).execFind(function (arr,data) {
+      console.log(data);
       var distances = {};
       for (var i = data.length - 1; i >= 0; i--) {
         var foodtruck = data[i];
@@ -266,13 +276,13 @@ var getFoodTrucks = function(req, res, next) {
         var id = data[i]._id;
         distances[id] = distance;
       }
-
+      console.log(distances);
       data.sort(function(a,b){
         var id1 = a._id;
         var id2 = b._id;
         var distance1 = distances[id1];
         var distance2 = distances[id2];
-        console.log(distance1 + " compare to " + distance2);
+      //  console.log(distance1 + " compare to " + distance2);
         if(distance1 < distance2) return -1;
         if(distance1 > distance2) return 1;
         return 0;
@@ -280,6 +290,7 @@ var getFoodTrucks = function(req, res, next) {
     res.send(data.slice(0,20));
   }); 
   } else {
+    console.log("No zip code returned, returning random 20 food trucks");
     FoodTruckMongooseModel.find().limit(20).sort('truckName', -1).execFind(function (arr,data) {
       res.send(data);
     });
@@ -338,14 +349,7 @@ mongodbServer.listen(mongodbPort, function() {
 
 });
 
-mongodbServer.get('/messages', getMessages);
-mongodbServer.post('/messages', postMessage);
 
-mongodbServer.get('/users', getUsers);
-mongodbServer.post('/users', postUser);
-
-
-mongodbServer.get('/foodtrucks/:lat/:lng',getFoodTrucksByLocation);
 mongodbServer.get('/foodtrucks',getFoodTrucks);
 mongodbServer.get('/',onHtmlRequestHandler);
 mongodbServer.get('/docs/.*',onHtmlRequestHandler);
